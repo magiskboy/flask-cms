@@ -1,0 +1,48 @@
+{% extends "admin/_base.html" %}
+
+{% block head %}
+<title>Dashboard</title>
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid px-4">
+    <h3 class="mt-4 mb-2">User</h3>
+    <div class="row">
+      <div class="col-xl-12 col-md-12">
+      <table class="table">
+        <caption>List of users</caption>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Profile</th>
+            <th scope="col">Fullname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr class="align-middle">
+            <th scope="row">{{ user.id_ }}</th>
+            <td><img src={{ user.profile_url }} alt={{ user.fullname }} width="48" height="48" class="rounded img-thumbnail" /></td>
+            <td>{{ user.fullname }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role.title() }}</td>
+            <td>
+              <a href="{{ url_for("admin.detail_user", username=user.username) }}">View</a> |
+              <a href="/users/ban">Ban</a> | 
+              <a href="/users/delete">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='admin/js/scripts.js') }}"></script>
+{% endblock %}

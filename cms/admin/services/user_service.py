@@ -1,5 +1,6 @@
 import logging
 from cms.user.models import User
+from cms.extensions import db
 
 
 logger = logging.getLogger(__name__)
@@ -33,8 +34,20 @@ class UserService:
         else:
             raise TypeError(f"id_or_username must be str or int, not {type(id_or_username)}")
 
-    def get_list_user(self, filters=None, offset = 0):
-        return User.get_list(filters, ("id_", "fullname", "profile_url", "role"), offset)
+    def get_list_user(self, keyword=None, inactive=None, offset = 0, limit = 10):
+        query = db.session.query(User)
+
+        if keyword:
+            query = query.filter(db.or_(
+                User.username.like(f"%{keyword}%"),
+                User.email.like(f"%{keyword}%"), 
+                User.fullname.like(f"%{keyword}%")
+            ))
+
+        query = query.filter(User.is_deleted==(True if inactive == "true" else False))
+        query = query.offset(offset).limit(limit)
+
+        return query.all()
 
     def get_user(self, id_or_username):
         if isinstance(id_or_username, int):

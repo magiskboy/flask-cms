@@ -18,7 +18,7 @@ class BaseSetting:
     ADMIN_SIDEBAR = [
         {
             "title": "Overview",
-            "items": [{"title": "Dashboard", "link": "/"}],
+            "items": [{"title": "Dashboard", "link": "/admin"}],
         },
         {
             "title": "Post",
@@ -31,9 +31,8 @@ class BaseSetting:
         {
             "title": "User",
             "items": [
-                {"title": "Normal user", "link": ""},
-                {"title": "Writer", "link": ""},
-                {"title": "Deleted user", "link": ""},
+                {"title": "Active user", "link": "/admin/users"},
+                {"title": "Deleted user", "link": "/admin/users?inactive=true"},
             ],
         },
         {
@@ -47,7 +46,7 @@ class BaseSetting:
 
 
 class DevelopmentSetting(BaseSetting):
-    ...
+    TEMPLATES_AUTO_RELOAD = True
 
 
 def get_setting(name):

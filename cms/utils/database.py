@@ -43,23 +43,5 @@ class Model:
             query.delete()
 
     @classmethod
-    def get_list(cls, filters=None, columns=None, offset=0, limit=20, iterable=False):
-        query = db.session.query(cls)
-
-        if filters:
-            query = query.filter(filters)
-
-        if columns:
-            selected_columns = [getattr(cls, column) for column in columns]
-            query = query.with_entities(*selected_columns)
-
-        query = query.offset(offset).limit(limit)
-
-        if iterable:
-            return query
-        else:
-            return query.all()
-
-    @classmethod
     def get(cls, id_):
         db.session.query(cls).get(id_)

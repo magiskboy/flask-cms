@@ -24,7 +24,7 @@ class User(database.Model, db.Model):
         raise RuntimeError("Set value is denided!!!")
 
     @password.setter
-    def set_password(self, password):
+    def password(self, password):
         self.hash_password = generate_password_hash(password)
 
     def verify_password(self, password):
@@ -44,7 +44,7 @@ class User(database.Model, db.Model):
     
     @classmethod
     def get_by_username(cls, username):
-        return db.session.query(cls).filter({"username": username}).first()
+        return db.session.query(cls).filter(User.username==username).first()
 
     def __str__(self):
         return f"<User {self.id_}: {self.username}>"

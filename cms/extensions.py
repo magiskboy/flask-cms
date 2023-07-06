@@ -11,7 +11,6 @@ def configure_sqlalchemy(app):
     migrate.init_app(app, db)
 
 
-
 login_manager = LoginManager()
 
 def configure_login_manager(app):
