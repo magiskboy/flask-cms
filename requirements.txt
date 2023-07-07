@@ -10,3 +10,5 @@ markdown==3.4.3
 gunicorn==20.1.0
 Faker
 cryptography
+Flask-Admin
+flask-shell-ipython

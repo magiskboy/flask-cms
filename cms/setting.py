@@ -1,4 +1,5 @@
 import os
+import secrets
 
 
 def _get_app_env(name, fallback = None, prefix = "CMS_"):
@@ -14,6 +15,10 @@ class BaseSetting:
     DB_PASS = _get_app_env("DB_PASS", "flask_cms")
 
     SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
+    SECRET_KEY = secrets.token_bytes(32)
+
+    FLASK_ADMIN_SWATCH = 'cerulean' # flask-admin theme
 
     ADMIN_SIDEBAR = [
         {

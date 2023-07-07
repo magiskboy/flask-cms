@@ -1,7 +1,9 @@
 from enum import Enum
 from werkzeug.security import check_password_hash, generate_password_hash
-from ..extensions import db
-from ..utils import database
+from markupsafe import Markup
+from cms.admin import BaseModelView
+from cms.extensions import db
+from cms.utils import database
 
 
 class UserRole(str, Enum):
@@ -35,16 +37,26 @@ class User(database.Model, db.Model):
         db.session.query(cls).filter(username=username).update(data)
 
     @classmethod
-    def delete_by_username(cls, username, is_soft = True):
-        query = db.session.query(cls).filter(username=username)
-        if is_soft:
-            query.update({"is_deleted": True})
-        else:
-            query.delete()
-    
-    @classmethod
     def get_by_username(cls, username):
         return db.session.query(cls).filter(User.username==username).first()
 
     def __str__(self):
-        return f"<User {self.id_}: {self.username}>"
+        return self.fullname
+
+
+class UserModelView(BaseModelView):
+    column_filters = ("role",)
+    column_list = ("id_", "profile_url", "fullname", "role", "email")
+    column_searchable_list = ['fullname', 'username', 'email']
+
+    def _display_thumbnail(view, context, model, name):
+        return Markup(
+            '<center><img src="{}" class="rounded img-thumbnail mx-auto" width="48" height="48" /></center>' \
+            .format(model.profile_url)
+        )
+
+    column_formatters = {
+        "profile_url": _display_thumbnail,
+    }
+
+

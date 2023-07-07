@@ -1,69 +1,57 @@
-{% extends "admin/_base.html" %}
+{% extends "admin/base.html" %}
 
-{% block head %}
-<title>Dashboard</title>
-{% endblock %}
-
-{% block main %}
+{% block body %}
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Dashboard</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
+    <h1 class="mt-4 mb-4">Dashboard</h1>
     <div class="row">
         <div class="col-xl-3 col-md-6">
             <div class="card mb-4 bg-primary text-white">
-                <div class="card-body d-flex justify-content-between p-4">
+                <div class="d-flex justify-content-between p-4">
                   <div>
-                    <div class="display-6">11.2k</div>
-                    <div class="card-text">Access</div>
+                    <div class="h1">{{ overview["access"] }}</div>
+                    <div class="card-text h6">Access</div>
                   </div>
-                  <div class="display-6"><i class="fa-solid fa-eye"></i></div>
+                  <i class="fa-solid fa-eye h1"></i>
                 </div>
             </div>
         </div>
 
         <div class="col-xl-3 col-md-6">
             <div class="card mb-4 bg-success text-white">
-                <div class="card-body d-flex justify-content-between p-4">
+                <div class="d-flex justify-content-between p-4">
                   <div>
-                    <div class="display-6">2.67k</div>
-                    <div class="card-text">Users</div>
+                    <div class="h1">{{ overview["users"] }}</div>
+                    <div class="card-text h6">Users</div>
                   </div>
-                  <div class="display-6">
-                    <i class="fa-solid fa-users"></i>
-                  </i></div>
+                    <i class="fa-solid fa-users h1"></i>
                 </div>
             </div>
         </div>
 
         <div class="col-xl-3 col-md-6">
             <div class="card mb-4 bg-warning text-white">
-                <div class="card-body d-flex justify-content-between p-4">
+                <div class="d-flex justify-content-between p-4">
                   <div>
-                    <div class="display-6">56</div>
-                    <div class="card-text">Articles</div>
+                    <div class="h1">{{ overview["articles"] }}</div>
+                    <div class="card-text h6">Articles</div>
                   </div>
-                  <div class="display-6"><i class="fa-regular fa-newspaper"></i></div>
+                  <i class="fa-regular fa-newspaper h1"></i>
                 </div>
             </div>
         </div>
 
         <div class="col-xl-3 col-md-6">
             <div class="card mb-4 bg-danger text-white">
-                <div class="card-body d-flex justify-content-between p-4">
+                <div class="d-flex justify-content-between p-4">
                   <div>
-                    <div class="display-6">13</div>
-                    <div class="card-text">Categories</div>
+                    <div class="h1">{{ overview["categories"] }}</div>
+                    <div class="card-text h6">Categories</div>
                   </div>
-                  <div class="display-6"><i class="fa-solid fa-layer-group"></i></div>
+                  <i class="fa-solid fa-layer-group h1"></i>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-<script src="{{ url_for('static', filename='admin/js/scripts.js') }}"></script>
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 {% endblock %}

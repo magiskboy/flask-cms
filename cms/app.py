@@ -1,7 +1,9 @@
 from flask import Flask
 from .extensions import configure_sqlalchemy, configure_template
 from .setting import get_setting
-from .admin.views import load_blueprint_app as register_admin_blueprint
+from cms.admin.views import load_blueprint_app as register_admin_blueprint
+from cms.user.views import load_blueprint_app as register_user_blueprint
+from cms.content.views import load_blueprint_app as register_content_blueprint
 
 
 def create_app(config_name=None):
@@ -16,5 +18,7 @@ def create_app(config_name=None):
 
     # load modules
     register_admin_blueprint(app)
+    register_user_blueprint(app)
+    register_content_blueprint(app)
     
     return app

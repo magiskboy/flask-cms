@@ -13,6 +13,7 @@ def gen_user():
         username=faker.user_name(),
         role=faker.random_element([UserRole.normal, UserRole.writer]),
         email=faker.email(),
+        is_deleted=faker.boolean(),
     )
     u.password = faker.password()
     return u
