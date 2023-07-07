@@ -1,3 +1,4 @@
+from flask import url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -14,8 +15,10 @@ def configure_sqlalchemy(app):
 
 login_manager = LoginManager()
 
+
 def configure_login_manager(app):
     login_manager.init_app(app)
+    login_manager.login_view = url_for("auth.login")
 
 
 def configure_template(app):

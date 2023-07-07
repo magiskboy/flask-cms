@@ -4,6 +4,8 @@ from .setting import get_setting
 from cms.admin.views import load_blueprint_app as register_admin_blueprint
 from cms.user.views import load_blueprint_app as register_user_blueprint
 from cms.content.views import load_blueprint_app as register_content_blueprint
+from cms.auth.views import load_blueprint_app as register_auth_blueprint
+from cms.main.views import load_blueprint_app as register_main_blueprint
 
 
 def create_app(config_name=None):
@@ -20,5 +22,7 @@ def create_app(config_name=None):
     register_admin_blueprint(app)
     register_user_blueprint(app)
     register_content_blueprint(app)
+    register_auth_blueprint(app)
+    register_main_blueprint(app)
     
     return app
