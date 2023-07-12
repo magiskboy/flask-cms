@@ -46,8 +46,9 @@ class User(database.Model, db.Model):
 
 class UserModelView(BaseModelView):
     column_filters = ("role",)
-    column_list = ("id_", "profile_url", "fullname", "role", "email")
+    column_list = ("id_", "profile_url", "fullname", "email", "role")
     column_searchable_list = ['fullname', 'username', 'email']
+    column_editable_list = ('role',)
 
     def _display_thumbnail(view, context, model, name):
         return Markup(

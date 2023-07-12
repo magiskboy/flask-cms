@@ -1,0 +1,7 @@
+:root {
+  navbar-color: #18354c;
+}
+
+.bg-dark-blue {
+  background-color: var(--navbar-color);
+}

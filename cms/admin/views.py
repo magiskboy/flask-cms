@@ -24,7 +24,7 @@ class IndexView(AdminIndexView):
     @expose("/", methods=["GET"])
     def index(self):
         from cms.user.service import UserService
-        from cms.content.service import ContentService
+        from cms.content.services.content import ContentService
 
         user_service = UserService()
         content_service = ContentService()

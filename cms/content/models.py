@@ -6,7 +6,7 @@ from cms.admin import BaseModelView
 class Like(Model, db.Model):
     article_id = db.Column(db.Integer(), db.ForeignKey("article.id"), nullable=False)
     user_id = db.Column(db.Integer(), db.ForeignKey("user.id"), nullable=False)
-    user = db.relationship("User")
+    user = db.relationship("User", viewonly=True)
 
 
 class Comment(Model, db.Model):
@@ -65,7 +65,7 @@ class Article(Model, db.Model):
 
 class ArticalModelView(BaseModelView):
     column_list = ("title", "category", "summary", "author")
-    column_editable_list = ("title", "slug", "markdown_content", "summary", "author", "category", "tags")
+
 
 class TagModelView(BaseModelView):
     column_list = ("name", "created_by")
@@ -74,3 +74,7 @@ class TagModelView(BaseModelView):
 
 class LikeModelView(BaseModelView):
     column_list = ("user", "article")
+
+
+class CategoryModelView(BaseModelView):
+    column_editable_list = ('title', 'slug')
